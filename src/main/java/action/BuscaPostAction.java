@@ -24,12 +24,13 @@ public class BuscaPostAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
         try {
-            String keyword = request.getParameter("keyword");
+            String constituinte = request.getParameter("constituinte");
             Minerador mineracao = new Minerador();
-            mineracao.Operacao(keyword);
+            
             
             List<Repositorio> lstRepositorios = new ArrayList<>();
-            lstRepositorios = RepositorioDAO.getINSTANCE().readAll(keyword);
+            lstRepositorios = mineracao.Operacao(constituinte); 
+            //lstRepositorios = RepositorioDAO.getINSTANCE().readAll(keyword);
             //Collections.sort(lstRepositorios);
             request.setAttribute("repositorios", lstRepositorios);
             

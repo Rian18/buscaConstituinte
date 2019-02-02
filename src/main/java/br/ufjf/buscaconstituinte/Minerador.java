@@ -20,41 +20,40 @@ import persistence.RepositorioDAO;
  */
 public class Minerador {
 
-    public List<Repositorio> Operacao(String palavraChave) throws IOException, ClassNotFoundException, SQLException {
+    public List<Repositorio> Operacao(String constituinte) throws IOException, ClassNotFoundException, SQLException {
 
         Conexao conexao = new Conexao();
         String url = "";
         GitHub github = conexao.getConexao();
         GHRepositorySearchBuilder repo = github.searchRepositories();
-        GHRepositorySearchBuilder repos = repo.q(palavraChave);
+        GHRepositorySearchBuilder repos = repo.q(constituinte);
         PagedIterable<GHRepository> repositorios = repos.list();
         List<Repositorio> lstRepositorios = new ArrayList<>();
 
         for (GHRepository repositorio : repositorios) {
 
-            try {
-
-                System.out.println("Descrição do Repositório : " + repositorio.getDescription());
-                System.out.println("Nome Completo : " + repositorio.getFullName());
-                System.out.println("Linguagem de Programação : " + repositorio.getLanguage());
-                url = repositorio.getHtmlUrl().toString();
-                System.out.println(url);
-                GHUser user = repositorio.getOwner();
-                System.out.println("-----------------||----------------");
-
-                lstRepositorios.add(new Repositorio(repositorio.getId(), repositorio.getDescription(),
-                        repositorio.getFullName(), user.getName(), user.getEmail(),url));
-
-                //Salvar Repositorio no banco
-               
-                RepositorioDAO.getINSTANCE().save(new Repositorio(repositorio.getId(),repositorio.getDescription(),
-                        repositorio.getFullName(),repositorio.getName(),url,palavraChave));
-
-            } catch (SQLException ex) {
-                Logger.getLogger(Minerador.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Minerador.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            url = repositorio.getHtmlUrl().toString();
+            GHUser user = repositorio.getOwner();
+            System.out.println(repositorio.getId());
+            System.out.println("Descrição do Repositório : " + repositorio.getDescription());
+            System.out.println("Nome Completo : " + repositorio.getFullName());
+            System.out.println("Linguagem de Programação : " + repositorio.getLanguage());
+            System.out.println("URL: " + url);
+            System.out.println("" + repositorio.getForks());
+            System.out.println(""+ repositorio.getSize());
+            System.out.println("" + repositorio.getStargazersCount());
+            System.out.println("" + repositorio.getSubscribersCount());
+            System.out.println("" + repositorio.getWatchers());
+            System.out.println("-----------------||----------------");
+            lstRepositorios.add(new Repositorio(repositorio.getId(),repositorio.getFullName(),repositorio.getName(),
+                    url, repositorio.getDescription(), repositorio.getLanguage(), repositorio.getForks(),
+                    repositorio.getSize(), repositorio.getStargazersCount(),repositorio.getSubscribersCount(),
+                    repositorio.getWatchers(),constituinte));
+            
+            //Salvar Repositorio no banco
+            
+            //RepositorioDAO.getINSTANCE().save(new Repositorio(repositorio.getId(),repositorio.getDescription(),
+            //  repositorio.getFullName(),repositorio.getName(),url,palavraChave));
         }
 
         Repositorio retorno = RepositorioDAO.getINSTANCE().read(lstRepositorios.get(1).getId());

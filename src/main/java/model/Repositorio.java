@@ -7,24 +7,36 @@ import java.util.List;
  * @author Rian Alves
  */
 public class Repositorio {
-     private long id; 
-    private String description;
+    private long id; 
     private String fullName;
     private String name;
-    private String email;
     private String url;
-    private String palavraChave;
-  
-    
-     public Repositorio(long id, String description, String fullName, String name, String url, String palavraChave) {
+    private String description;
+    private String linguagem;
+    private int forks;
+    private int size;
+    private int star;
+    private int subscribers;
+    private int watchers;
+    private String constituinte;
+
+    public Repositorio(long id, String fullName, String name, String url, String description, String linguagem, int forks, int size, int star, int subscribers, int watchers, String constituinte) {
         this.id = id;
-        this.description = description;
         this.fullName = fullName;
         this.name = name;
         this.url = url;
-        this.palavraChave = palavraChave;
-     }
-     
+        this.description = description;
+        this.linguagem = linguagem;
+        this.forks = forks;
+        this.size = size;
+        this.star = star;
+        this.subscribers = subscribers;
+        this.watchers = watchers;
+        this.constituinte = constituinte;
+    }
+  
+   
+   
     public String getDescription() {
         return description;
     }
@@ -49,13 +61,7 @@ public class Repositorio {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  
 
     public String getUrl() {
         return url;
@@ -74,11 +80,99 @@ public class Repositorio {
         this.id = id;
     }
     
-    public String getPalavraChave() {
-        return palavraChave;
+ 
+    public String getLinguagem() {
+        return linguagem;
     }
 
-    public void setPalavraChave(String palavraChave) {
-        this.palavraChave = palavraChave;
+    /**
+     * @param linguagem the linguagem to set
+     */
+    public void setLinguagem(String linguagem) {
+        this.linguagem = linguagem;
+    }
+
+    /**
+     * @return the forks
+     */
+    public int getForks() {
+        return forks;
+    }
+
+    /**
+     * @param forks the forks to set
+     */
+    public void setForks(int forks) {
+        this.forks = forks;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    /**
+     * @return the star
+     */
+    public int getStar() {
+        return star;
+    }
+
+    /**
+     * @param star the star to set
+     */
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    /**
+     * @return the subscribers
+     */
+    public int getSubscribers() {
+        return subscribers;
+    }
+
+    /**
+     * @param subscribers the subscribers to set
+     */
+    public void setSubscribers(int subscribers) {
+        this.subscribers = subscribers;
+    }
+
+    /**
+     * @return the watchers
+     */
+    public int getWatchers() {
+        return watchers;
+    }
+
+    /**
+     * @param watchers the watchers to set
+     */
+    public void setWatchers(int watchers) {
+        this.watchers = watchers;
+    }
+
+    /**
+     * @return the constituinte
+     */
+    public String getConstituinte() {
+        return constituinte;
+    }
+
+    /**
+     * @param constituinte the constituinte to set
+     */
+    public void setConstituinte(String constituinte) {
+        this.constituinte = constituinte;
     }
 }

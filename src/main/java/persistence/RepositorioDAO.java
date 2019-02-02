@@ -30,7 +30,7 @@ public class RepositorioDAO {
         try {
             conn = DataBaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            String sql = "INSERT into repositorio(idrepositorio,description,fullname,namerep,url,palavraChave) values (" + repositorio.getId() + ",'" + repositorio.getDescription() + "','" + repositorio.getFullName() + "','" + repositorio.getName() + "','" + repositorio.getUrl() + "','" + repositorio.getPalavraChave() + "')";
+            String sql = "";//INSERT into repositorio(idrepositorio,description,fullname,namerep,url,palavraChave) values (" + repositorio.getId() + ",'" + repositorio.getDescription() + "','" + repositorio.getFullName() + "','" + repositorio.getName() + "','" + repositorio.getUrl() + "','" + repositorio.getPalavraChave() + "')";
             st.execute(sql);
         } catch (SQLException e) {
             throw e;
@@ -51,7 +51,7 @@ public class RepositorioDAO {
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
 
-                return new Repositorio(rs.getLong("idrepositorio"), rs.getString("description"), rs.getString("fullname"), rs.getString("namerep"), rs.getString("url"), rs.getString("palavraChave"));
+                //return new Repositorio(rs.getLong("idrepositorio"), rs.getString("description"), rs.getString("fullname"), rs.getString("namerep"), rs.getString("url"), rs.getString("palavraChave"));
             }
 
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class RepositorioDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
-                lstRepositorio.add(new Repositorio(rs.getLong("idrepositorio"), rs.getString("description"), rs.getString("fullname"), rs.getString("name"), rs.getString("url"), rs.getString("palavraChave")));
+               // lstRepositorio.add(new Repositorio(rs.getLong("idrepositorio"), rs.getString("description"), rs.getString("fullname"), rs.getString("name"), rs.getString("url"), rs.getString("palavraChave")));
             }
 
         } catch (SQLException ex) {

@@ -65,8 +65,8 @@
                 <div class="col"> 
                 </div>
                 <div class="col">
-                    <center> <button type="submit" class="btn btn-success btn-sm">Search</button>
-                        <button type="reset" class="btn btn-danger  btn-sm"/>Cancel</button> </center>
+                    <center> <button type="submit" class="btn btn-success btn-sm">Buscar</button>
+                        <button type="reset" class="btn btn-danger  btn-sm"/>Cancelar</button> </center>
                     <br/>
                 </div>
                 <div class="col"> 

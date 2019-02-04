@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Repositorio;
+import br.ufjf.model.Repositorio;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedIterable;
-import persistence.RepositorioDAO;
+import br.ufjf.persistence.RepositorioDAO;
 
 /**
  *
@@ -28,39 +28,39 @@ public class Minerador {
         GHRepositorySearchBuilder repo = github.searchRepositories();
         GHRepositorySearchBuilder repos = repo.q(constituinte);
         PagedIterable<GHRepository> repositorios = repos.list();
+        List<GHRepository> repositoriosIter = repositorios.asList();
         List<Repositorio> lstRepositorios = new ArrayList<>();
+        if (!repositoriosIter.isEmpty()) {
+            for (GHRepository repositorio : repositoriosIter) {
 
-        for (GHRepository repositorio : repositorios) {
+                url = repositorio.getHtmlUrl().toString();
+                GHUser user = repositorio.getOwner();
+                System.out.println(repositorio.getId());
+                System.out.println("Descrição do Repositório : " + repositorio.getDescription());
+                System.out.println("Nome Completo : " + repositorio.getFullName());
+                System.out.println("Linguagem de Programação : " + repositorio.getLanguage());
+                System.out.println("URL: " + url);
+                System.out.println("" + repositorio.getForks());
+                System.out.println("" + repositorio.getSize());
+                System.out.println("" + repositorio.getStargazersCount());
+                System.out.println("" + repositorio.getSubscribersCount());
+                System.out.println("" + repositorio.getWatchers());
+                System.out.println("-----------------||----------------");
+                lstRepositorios.add(new Repositorio(repositorio.getId(), repositorio.getFullName(), repositorio.getName(),
+                        url, repositorio.getDescription(), repositorio.getLanguage(), repositorio.getForks(),
+                        repositorio.getSize(), repositorio.getStargazersCount(), repositorio.getSubscribersCount(),
+                        repositorio.getWatchers(), constituinte));
 
-            url = repositorio.getHtmlUrl().toString();
-            GHUser user = repositorio.getOwner();
-            System.out.println(repositorio.getId());
-            System.out.println("Descrição do Repositório : " + repositorio.getDescription());
-            System.out.println("Nome Completo : " + repositorio.getFullName());
-            System.out.println("Linguagem de Programação : " + repositorio.getLanguage());
-            System.out.println("URL: " + url);
-            System.out.println("" + repositorio.getForks());
-            System.out.println(""+ repositorio.getSize());
-            System.out.println("" + repositorio.getStargazersCount());
-            System.out.println("" + repositorio.getSubscribersCount());
-            System.out.println("" + repositorio.getWatchers());
-            System.out.println("-----------------||----------------");
-            lstRepositorios.add(new Repositorio(repositorio.getId(),repositorio.getFullName(),repositorio.getName(),
-                    url, repositorio.getDescription(), repositorio.getLanguage(), repositorio.getForks(),
-                    repositorio.getSize(), repositorio.getStargazersCount(),repositorio.getSubscribersCount(),
-                    repositorio.getWatchers(),constituinte));
-            
-            //Salvar Repositorio no banco
-            
-            //RepositorioDAO.getINSTANCE().save(new Repositorio(repositorio.getId(),repositorio.getDescription(),
-            //  repositorio.getFullName(),repositorio.getName(),url,palavraChave));
+                //Salvar Repositorio no banco
+                //RepositorioDAO.getINSTANCE().save(new Repositorio(repositorio.getId(),repositorio.getDescription(),
+                //  repositorio.getFullName(),repositorio.getName(),url,palavraChave));
+            }
+
+            /*Repositorio retorno = RepositorioDAO.getINSTANCE().read(lstRepositorios.get(1).getId());
+            System.out.println("ID : " + String.valueOf(retorno.getId()));
+            System.out.println("Nome: " + retorno.getFullName());
+            System.out.println(" Descrição: " + retorno.getDescription());*/
         }
-
-        Repositorio retorno = RepositorioDAO.getINSTANCE().read(lstRepositorios.get(1).getId());
-        System.out.println("ID : " + String.valueOf(retorno.getId()));
-        System.out.println("Nome: " + retorno.getFullName());
-        System.out.println(" Descrição: " + retorno.getDescription());
-
         //Retornar Repositório da base de dados
         return lstRepositorios;
 

@@ -46,7 +46,7 @@
         <br/>
 
         <br/>
-        <form action="FrontController?action=BuscarDominioPost" method="post">
+        <form action="FrontControllerBusca?action=BuscaPost" method="post">
             <div class="row">
                 <div class="col">
                 </div>

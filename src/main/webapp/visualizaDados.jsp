@@ -153,7 +153,7 @@
                 <table class="table table-hover" >
                     <thead>
                         <tr class="table-primary">
-                            <td colspan="3">Repositórios</td>
+                            <td colspan="4">Repositórios</td>
                         </tr>
                         
                        
@@ -163,13 +163,15 @@
                             <th><center>Repository</center></th>
                             <th><center>Language</center></th>
                             <th><center><img src="imagens\star-icon.png" id="imagemborda" alt="Estrelas do Repositório" width="15" height="15"></center></th>
+                            <th><center>Average(Forks,Watchers and Stars)</center></th>
 
                         </tr>
                         <c:forEach var="repositorio" items="${repositorios}">
                             <tr>
                                 <td><center><a href="${repositorio.url}" target="_blank">${repositorio.name}</center></td> 
                                 <td><center>${repositorio.linguagem}</center></td> 
-                                <td><center>${repositorio.numEstrelas}</center></td> 
+                                <td><center>${repositorio.star}</center></td> 
+                                <td><center>${repositorio.getMedia()}</center></td> 
 
                         </tr>
                     </c:forEach>

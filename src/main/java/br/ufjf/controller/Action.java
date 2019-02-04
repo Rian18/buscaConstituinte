@@ -1,5 +1,5 @@
 
-package controller;
+package br.ufjf.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

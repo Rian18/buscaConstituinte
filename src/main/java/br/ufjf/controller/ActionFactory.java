@@ -1,4 +1,4 @@
-package controller;
+package br.ufjf.controller;
 
 public class ActionFactory {
 

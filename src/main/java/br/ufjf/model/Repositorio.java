@@ -1,5 +1,6 @@
-package model;
+package br.ufjf.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -7,17 +8,18 @@ import java.util.List;
  * @author Rian Alves
  */
 public class Repositorio {
-    private long id; 
+
+    private long id;
     private String fullName;
     private String name;
     private String url;
     private String description;
     private String linguagem;
-    private int forks;
-    private int size;
-    private int star;
-    private int subscribers;
-    private int watchers;
+    private Integer forks;
+    private Integer size;
+    private Integer star;
+    private Integer subscribers;
+    private Integer watchers;
     private String constituinte;
 
     public Repositorio(long id, String fullName, String name, String url, String description, String linguagem, int forks, int size, int star, int subscribers, int watchers, String constituinte) {
@@ -34,9 +36,7 @@ public class Repositorio {
         this.watchers = watchers;
         this.constituinte = constituinte;
     }
-  
-   
-   
+
     public String getDescription() {
         return description;
     }
@@ -61,8 +61,6 @@ public class Repositorio {
         this.name = name;
     }
 
-  
-
     public String getUrl() {
         return url;
     }
@@ -71,7 +69,6 @@ public class Repositorio {
         this.url = url;
     }
 
-   
     public long getId() {
         return id;
     }
@@ -79,8 +76,7 @@ public class Repositorio {
     public void setId(long id) {
         this.id = id;
     }
-    
- 
+
     public String getLinguagem() {
         return linguagem;
     }
@@ -95,7 +91,7 @@ public class Repositorio {
     /**
      * @return the forks
      */
-    public int getForks() {
+    public Integer getForks() {
         return forks;
     }
 
@@ -109,7 +105,7 @@ public class Repositorio {
     /**
      * @return the size
      */
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -123,7 +119,7 @@ public class Repositorio {
     /**
      * @return the star
      */
-    public int getStar() {
+    public Integer getStar() {
         return star;
     }
 
@@ -137,7 +133,7 @@ public class Repositorio {
     /**
      * @return the subscribers
      */
-    public int getSubscribers() {
+    public Integer getSubscribers() {
         return subscribers;
     }
 
@@ -151,7 +147,7 @@ public class Repositorio {
     /**
      * @return the watchers
      */
-    public int getWatchers() {
+    public Integer getWatchers() {
         return watchers;
     }
 
@@ -174,5 +170,12 @@ public class Repositorio {
      */
     public void setConstituinte(String constituinte) {
         this.constituinte = constituinte;
+    }
+
+    public Double getMedia() {
+
+        BigDecimal a = new BigDecimal((this.forks + this.star + this.watchers) / 3.0);
+        BigDecimal roundOff = a.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        return roundOff.doubleValue();
     }
 }

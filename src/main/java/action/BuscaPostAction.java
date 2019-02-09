@@ -38,7 +38,15 @@ public class BuscaPostAction implements Action {
             Comparator c = Collections.reverseOrder(new MediaComparator());
             Collections.sort(lstRepositorios, c);
             request.setAttribute("repositorios", lstRepositorios);
+            Integer totalAcima = 0;
+            for(Repositorio r: lstRepositorios){
+                if(r.getMedia()==0){
+                    break;
+                }
+                totalAcima++;
+            }
             
+            request.setAttribute("totalAcima", totalAcima);
             RequestDispatcher despachante = request.getRequestDispatcher("/visualizaDados.jsp");
             despachante.forward(request, response);
         } catch (SQLException ex) {

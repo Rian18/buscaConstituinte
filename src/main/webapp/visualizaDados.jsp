@@ -63,12 +63,12 @@
 </script>
 
 <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawSeriesChart);
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawSeriesChart);
 
     function drawSeriesChart() {
 
-      var data = new google.visualization.DataTable();
+        var data = new google.visualization.DataTable();
         data.addColumn('string', 'Contribuidores');
         data.addColumn('number', 'Commits');
         data.addColumn('number', 'Followers');
@@ -79,65 +79,66 @@
             var commits = dados.contribuicao;
             var seguidores = dados.numseguidores;
             var local = dados.local;
-            data.addRows([[nome, commits,seguidores,local]]);
+            data.addRows([[nome, commits, seguidores, local]]);
         });
-      var options = {
-        title: 'Correlation between number of followers,  ' +
-               'commits and location of contributors',
-        hAxis: {title: 'Commits'},
-        vAxis: {title: 'Number of Followers'},
-        bubble: {textStyle: {fontSize: 11}}
-      };
+        var options = {
+            title: 'Correlation between number of followers,  ' +
+                    'commits and location of contributors',
+            hAxis: {title: 'Commits'},
+            vAxis: {title: 'Number of Followers'},
+            bubble: {textStyle: {fontSize: 11}}
+        };
 
-      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
-      chart.draw(data, options);
+        var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+        chart.draw(data, options);
     }
-    </script>
+</script>
 
 
 
-  <script type="text/javascript">
+<script type="text/javascript">
       var dados = <%=request.getAttribute("colaboradoresJson")%>;
-      google.charts.load('current', {'packages':['bar']});
+      google.charts.load('current', {'packages': ['bar']});
       google.charts.setOnLoadCallback(drawStuff);
 
       function drawStuff() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Contribuidores');
-        data.addColumn('number', 'Commits');
-        data.addColumn('number', 'Followers');
-       
-        $.each(dados, function (i, dados)
-        {
-            var nome = dados.nome;
-            var commits = dados.contribuicao;
-            var seguidores = dados.numseguidores;
-            data.addRows([[nome, commits,seguidores]]);
-        });
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Contribuidores');
+          data.addColumn('number', 'Commits');
+          data.addColumn('number', 'Followers');
 
-        var options = {
-          width: 800,
-          chart: {
-            title: 'Commits and Followers',
-            subtitle: 'data acquaintance'
-          },
-          bars: 'horizontal', // Required for Material Bar Charts.
-          series: {
-            0: { axis: 'Commits' }, // Bind series 0 to an axis named 'distance'.
-            1: { axis: 'Followers' } // Bind series 1 to an axis named 'brightness'.
-          },
-          axes: {
-            x: {
-              distance: {label: 'parsecs'}, // Bottom x-axis.
-              brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
-            }
-          }
-        };
+          $.each(dados, function (i, dados)
+          {
+              var nome = dados.nome;
+              var commits = dados.contribuicao;
+              var seguidores = dados.numseguidores;
+              data.addRows([[nome, commits, seguidores]]);
+          });
 
-      var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
-      chart.draw(data, options);
-    };
-    </script>
+          var options = {
+              width: 800,
+              chart: {
+                  title: 'Commits and Followers',
+                  subtitle: 'data acquaintance'
+              },
+              bars: 'horizontal', // Required for Material Bar Charts.
+              series: {
+                  0: {axis: 'Commits'}, // Bind series 0 to an axis named 'distance'.
+                  1: {axis: 'Followers'} // Bind series 1 to an axis named 'brightness'.
+              },
+              axes: {
+                  x: {
+                      distance: {label: 'parsecs'}, // Bottom x-axis.
+                      brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
+                  }
+              }
+          };
+
+          var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+          chart.draw(data, options);
+      }
+      ;
+</script>
 <title> Team Crowd - Visualização dos Dados</title>
 </head>
 <body>
@@ -145,33 +146,34 @@
     <br/>
 
     <div class="container-fluid">
-       
-      
-        <div class = "row">
-                       <div class="col">
 
+
+        <div class = "row">
+            <div class="col">
+                Total de repositórios: ${repositorios.size()}
+                Total de repositórios Acima da média: ${totalAcima}
                 <table class="table table-hover" >
                     <thead>
                         <tr class="table-primary">
                             <td colspan="4">Repositórios</td>
                         </tr>
-                        
-                       
+
+
                     </thead>
                     <tbody>
-                         <tr class="table-primary">
+                        <tr class="table-primary">
                             <th><center>Repository</center></th>
-                            <th><center>Language</center></th>
-                            <th><center><img src="imagens\star-icon.png" id="imagemborda" alt="Estrelas do Repositório" width="15" height="15"></center></th>
-                            <th><center>Average(Forks,Watchers and Stars)</center></th>
+                    <th><center>Language</center></th>
+                    <th><center><img src="imagens\star-icon.png" id="imagemborda" alt="Estrelas do Repositório" width="15" height="15"></center></th>
+                    <th><center>Average(Forks,Watchers and Stars)</center></th>
 
-                        </tr>
-                        <c:forEach var="repositorio" items="${repositorios}">
-                            <tr>
-                                <td><center><a href="${repositorio.url}" target="_blank">${repositorio.name}</center></td> 
-                                <td><center>${repositorio.linguagem}</center></td> 
-                                <td><center>${repositorio.star}</center></td> 
-                                <td><center>${repositorio.getMedia()}</center></td> 
+                    </tr>
+                    <c:forEach var="repositorio" items="${repositorios}">
+                        <tr>
+                            <td><center><a href="${repositorio.url}" target="_blank">${repositorio.name}</center></td> 
+                        <td><center>${repositorio.linguagem}</center></td> 
+                        <td><center>${repositorio.star}</center></td> 
+                        <td><center>${repositorio.getMedia()}</center></td> 
 
                         </tr>
                     </c:forEach>

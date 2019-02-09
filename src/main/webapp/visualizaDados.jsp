@@ -150,8 +150,8 @@
 
         <div class = "row">
             <div class="col">
-                Total de repositórios: ${repositorios.size()}
-                Total de repositórios Acima da média: ${totalAcima}
+                <h3>Total de repositórios: ${repositorios.size()}</h3>
+                <h3>Total de repositórios Acima da média: ${totalAcima}</h3>
                 <table class="table table-hover" >
                     <thead>
                         <tr class="table-primary">
